@@ -10,5 +10,6 @@ import UIKit
 class HomeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var poster: UIImageView!
+    @IBOutlet weak var titulo: UILabel!
     
 }

@@ -122,6 +122,7 @@ class APIRequisicao: NSObject {
     
     
     func exibeDetalheFilme(_ id:Int, completion: @escaping(_ movies:[String:Any]) -> Void) {
+        print("funcionou")
         Alamofire.request("https://api.themoviedb.org/3/movie/\(id)?api_key=ccb1629a18998c24e2b10223c88b1c5e&language=pt-BR", method: .get).responseJSON { (response) in
                 switch response.result {
                 case .success:

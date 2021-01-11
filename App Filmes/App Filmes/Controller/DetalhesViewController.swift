@@ -37,11 +37,11 @@ class DetalhesViewController: UIViewController {
     // MARK: Método para Recuperar os Detalhes
 
     func trazerFilmesEmTela(){
-        
-        guard let movie = filmeEscolhido as? [String:Any] else { return }
+        print("FuncaoOK")
+        guard let movie = filmeEscolhido as? [String:Any] else { return print("erro ao montar dicionario")}
         guard let id = movie["id"] as? Int else { return print("erro ao buscar id") }
-        guard let tituloFilme = movie["titulo"] as? String else { return }
-        guard let poster = movie["poster"] as? UIImage else { return }
+        guard let tituloFilme = movie["titulo"] as? String else { return print("erro o titulo de filme") }
+        guard let poster = movie["poster"] as? UIImage else { return print("para buscar a imagem")}
         
         recuperarDadosFilmeAPI.exibeDetalheFilme(id) { (resposta) in
             guard let dataEstreia = resposta["release_date"] as? String else { return }

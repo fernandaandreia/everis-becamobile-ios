@@ -24,9 +24,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         colecaoFilmes.dataSource = self
         colecaoFilmes.delegate = self
         recuperaImages()
-        FilmeTrendingAPI().requisicaoAPITrending()
-        FilmesDetalhesAPI().requisicaoAPIDetalhes()
-        
+//        FilmeTrendingAPI().requisicaoAPITrending()
+//        FilmesDetalhesAPI().requisicaoAPIDetalhes()
         
     }
 
@@ -46,7 +45,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let celulaFilme = collectionView.dequeueReusableCell(withReuseIdentifier: "celulaFilme", for: indexPath) as! HomeCollectionViewCell
-//        celulaFilme.layer.borderWidth = 0.5
+        celulaFilme.layer.borderWidth = 0.5
    
         let filmeEscolhido = mostraFilmeCollection[indexPath.item]
         
