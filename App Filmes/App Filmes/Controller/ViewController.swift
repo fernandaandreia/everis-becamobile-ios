@@ -9,44 +9,72 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
+  
     
+  
     // MARK: Atributos
-    var listaDeFilmes:Array<String> = ["Homem Aranha", "Cloverfield - Monstro", "Harry Potter"]
-    let personalKeyAPI:String = "ccb1629a18998c24e2b10223c88b1c5e"
-    let urlAPI:String = "https://api.themoviedb.org/3/trending/all/week?api_key=ccb1629a18998c24e2b10223c88b1c5e&language=pt-BR"
-
+    var mostraFilmeCollection:[[String:Any]] = [[:]]
+    let filmesAPI = APIRequisicao()
+    
+    
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        requisicaoAPITrending()
+        colecaoFilmes.dataSource = self
+        colecaoFilmes.delegate = self
+        recuperaImages()
+        FilmeTrendingAPI().requisicaoAPITrending()
+        FilmesDetalhesAPI().requisicaoAPIDetalhes()
+        
+        
     }
 
-    @IBAction func buttonBuscarFilme(_ sender: Any) {
+    // MARK: IBOutlets
+    @IBOutlet weak var colecaoFilmes: UICollectionView!
+
+    
+    // MARK: IBActions
+    
+    
+    
+    // MARK: Métodos Collection
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return mostraFilmeCollection.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let celulaFilme = collectionView.dequeueReusableCell(withReuseIdentifier: "celulaFilme", for: indexPath) as! HomeCollectionViewCell
+        celulaFilme.layer.borderWidth = 0.5
+   
+        let filmeEscolhido = mostraFilmeCollection[indexPath.item]
+        
+
+        guard let posterFilme = filmeEscolhido["imagem"] as? UIImage else { return celulaFilme }
+        
+        celulaFilme.poster.image = posterFilme
+
+       
+        return celulaFilme
     }
     
     
-    func requisicaoAPITrending() {
-
-           Alamofire.request(urlAPI, method: .get).responseJSON { (response) in
-
-                   switch response.result {
-                   case .success:
-                     if let resultChamadaAPI = response.result.value as? Dictionary<String, Any> {
-                     guard let listaTrending = resultChamadaAPI["results"] as? Array<Dictionary<String,Any>> else {return}
-                   print(listaTrending)
-                       }
-
-                       break
-                   case .failure:
-                     print(response.error!)
-                   break
-
-                   }
-
-               }
-
+    
+    // MARK: Métodos
+    
+     func recuperaImages() {
+        APIRequisicao().recuperaImagem { (movies) in
+            self.mostraFilmeCollection = movies
+            self.colecaoFilmes.reloadData()
         }
-    
+       
+        }
 
+    
+    
+ 
 }
+
+
 

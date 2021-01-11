@@ -5,6 +5,15 @@
       location = "group:App Filmes.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:App Filmes/../AppDelegate.swift">
+   </FileRef>
+   <FileRef
+      location = "group:App Filmes/../AppDelegate.swift">
+   </FileRef>
+   <FileRef
+      location = "group:App Filmes/../AppDelegate.swift">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
