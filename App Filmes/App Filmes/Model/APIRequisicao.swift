@@ -17,6 +17,8 @@ class APIRequisicao: NSObject {
     // MARK: Método .GET
     
     var filmes:[String:Any] = [:]
+    
+    // MARK: .GET RequisicaoAPI Trending
 
     func recuperaFilme (completion:@escaping(_ filmes:[[String:Any]]) -> Void ) {
 
@@ -79,7 +81,7 @@ class APIRequisicao: NSObject {
         }
     }
     
-    // MARK : Métodos
+    // MARK : Métodos - Recuperar Imagens
     
     func recuperaImagem(_ completion: @escaping(_ movies: [[String:Any]]) ->Void) {
         recuperaFilme() { (movies) in
@@ -116,6 +118,23 @@ class APIRequisicao: NSObject {
                 }
             }
         }
+    }
+    
+    
+    func exibeDetalheFilme(_ id:Int, completion: @escaping(_ movies:[String:Any]) -> Void) {
+        Alamofire.request("https://api.themoviedb.org/3/movie/\(id)?api_key=ccb1629a18998c24e2b10223c88b1c5e&language=pt-BR", method: .get).responseJSON { (response) in
+                switch response.result {
+                case .success:
+                    if let resposta = response.result.value as? [String:Any] {
+                        print("Resultado: \(resposta)")
+                        completion(resposta)
+                    }
+                    break
+                case .failure:
+              print(response.error!)
+                break
+                }
+            }
     }
     
     
