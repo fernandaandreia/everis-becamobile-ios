@@ -14,17 +14,22 @@ class DetalhesViewController: UIViewController {
   
     }
     
+    // MARK: Variáveis
+    
+    // MARK: IBOutlet
+    
+    // MARK: IBAction
 
     // MARK: Métodos
-    func pegarDetalhesPelo(id:Int ,completion: @escaping(_ filme:[[String:Any]]) -> Void)  {
-        APIRequisicao().recuperaFilme() { (movies) in
-            let filmeEscolhido = movies.filter({ movieAtual in
-            guard let movie = movieAtual["id"] as? Int else { return false }
-                return movie == id
-            })
-            completion(filmeEscolhido)
-        }
-    }
+//    func pegarDetalhesPelo(id:Int ,completion: @escaping(_ filme:[[String:Any]]) -> Void)  {
+//        APIRequisicao().recuperaFilme() { (movies) in
+//            let filmeEscolhido = movies.filter({ movieAtual in
+//            guard let movie = movieAtual["id"] as? Int else { return false }
+//                return movie == id
+//            })
+//            completion(filmeEscolhido)
+//        }
+//    }
 
 
 
